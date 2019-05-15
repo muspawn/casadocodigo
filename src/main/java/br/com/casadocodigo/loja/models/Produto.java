@@ -14,7 +14,10 @@ import javax.persistence.Id;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Produto implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -80,16 +83,12 @@ public class Produto implements Serializable{
 	public String getSumarioPath() {
 		return sumarioPath;
 	}
-	
+		
 	public void setSumarioPath(String sumarioPath) {
 		this.sumarioPath = sumarioPath;
 	}
 	
-	@Override
-	public String toString() {
-		return "Produto [titulo=" + titulo + ", descricao=" + descricao + ", paginas=" + paginas + "]";
-	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -115,5 +114,14 @@ public class Produto implements Serializable{
 		return precos.stream().filter(preco -> preco.getTipo().equals(tipoPreco))
 				.findFirst().get().getValor();
 	}
+	
+	
+	@Override
+	public String toString() {
+		return "Produto [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", paginas=" + paginas
+				+ ", sumarioPath=" + sumarioPath + ", precos=" + precos + ", dataLancamento=" + dataLancamento + "]";
+	}
+	
+	
 
 }

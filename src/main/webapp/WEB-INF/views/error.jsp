@@ -8,12 +8,12 @@
 	<section id="index-section" class="container middle">
 		<h1>Erro genérico acontecendo!!!</h1>
 		
-    <!-- 
+    
         Mensagem: ${exception.message}
         <c:forEach items="${exception.stackTrace}" var="stk">
             ${stk}
         </c:forEach>    
-    -->
+   
 	</section>
 	
 </tags:pageTemplate>

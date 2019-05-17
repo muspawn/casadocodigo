@@ -1,5 +1,6 @@
 package br.com.casadocodigo.loja.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -10,18 +11,30 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-public class Usuario implements UserDetails {
+@Table(name = "usuario")
+public class Usuario implements UserDetails, Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	private String email;
+	
+	@NotNull
 	private String senha;
+	
+	@NotNull
+	private String senharepetir;
+	
+	
+	@NotNull
 	private String nome;
 
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -75,6 +88,14 @@ public class Usuario implements UserDetails {
 	@Override
 	public String getUsername() {
 		return this.email;
+	}
+
+	public String getSenharepetir() {
+		return senharepetir;
+	}
+
+	public void setSenharepetir(String senharepetir) {
+		this.senharepetir = senharepetir;
 	}
 
 	@Override

@@ -57,5 +57,8 @@ public class UsuarioDAO implements UserDetailsService{
 		return manager.createQuery("select u from Usuario u", Usuario.class).getResultList();
 	}
 
+	public List<Usuario> listarUsuariosComRoles() throws Exception  {
+		return manager.createQuery("select distinct(u) from Usuario u    ", Usuario.class).getResultList();
+	}
 
 }

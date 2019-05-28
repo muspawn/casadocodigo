@@ -12,8 +12,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <c:url value="/resources/css" var="cssPath" />
+<c:url value="/resources/imagens" var="imgPath"/>
+
 <link rel="stylesheet" href="${cssPath}/bootstrap.min.css" />
 <link rel="stylesheet" href="${cssPath}/bootstrap-theme.min.css" />
+
+<!-- <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap-theme.min.css" /> -->
 
 <title>Livros de Java, Android, iPhone, Ruby, PHP e muito mais - Casa do Código</title>
 </head>
@@ -54,7 +59,7 @@
 		
 		<a href="${s:mvcUrl('UC#form').build()} }">Novo Usuário</a>
 		<br> 
-		<h1>Lista de Usuarios</h1>
+		<h1>Lista de Usuarios </h1>
 		<p> ${sucesso} </p>
 		<p> ${falha} </p>
 	
@@ -62,6 +67,8 @@
 			<tr>
 				<th>email</th>
 				<th>Nome</th>
+				<th>Roles </th>
+				<th/>
 
 			</tr>
 			<c:forEach items="${usuarios}" var="usuarios">
@@ -69,10 +76,29 @@
 					<td>${usuarios.email } </td>
 					
 					<td>${usuarios.nome }</td>
+					<td>
+						<c:forEach items="${usuarios.roles }" var="roles" varStatus="id">
+							<c:if test="${id.count} > 1 ">, </c:if>
+							${roles.nome }
+						</c:forEach>
+					</td>
+					<td> <a href="${s:mvcUrl('UC#detalhe').arg(0, usuarios.email).build() }">   <p style="text-align:center;"> <img  src="${imgPath}/adicionar.png" alt="+"/> </p> </a></td>
 				
 				</tr>
 			</c:forEach>
 		</table>
 	</div>
+	
+	<!-- Inicio modal -->
+		<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-lg">
+		    <div class="modal-content">
+		      ...
+		    </div>
+		  </div>
+		</div>
+	<!-- Final modal -->
+	
+	
 </body>
 </html>

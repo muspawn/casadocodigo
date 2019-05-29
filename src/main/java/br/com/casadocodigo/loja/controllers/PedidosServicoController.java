@@ -11,20 +11,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.com.casadocodigo.loja.models.Pedidos;
 
-
-
 @Controller
-
-
 
 public class PedidosServicoController {
 
 	
 	@Autowired
 	RestTemplate restTemplate;
-	
-
-	
 	
 	String uri = "https://book-payment.herokuapp.com/orders";
 	

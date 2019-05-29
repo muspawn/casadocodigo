@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -33,7 +34,7 @@
 	        <span class="icon-bar"></span>
 	        <span class="icon-bar"></span>
 	      </button>
-	      <a class="navbar-brand" href="${s:mvcUrl('HC#index').build()}">Casa do Código</a>
+	      <a class="navbar-brand" href="${s:mvcUrl('HC#index').build()}" >Casa do Código</a>
 	    </div>
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
@@ -57,14 +58,94 @@
 
 	<div class="container">
 		
-		
+		<form:form action="${s:mvcUrl('updateRolesdoUsuario').build() } " method="post"   modelAttribute="usuarios">
+		<%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> --%>
 		<br> 
 		<h1>Cadastro de permissão para: ${usuarios.nome}  </h1>
 		<p> ${sucesso} </p>
 		<p> ${falha} </p>
 	
+		
+		<div class="container">
+		
 
-	</div>
+		
+		<div class="form-group">
+		
+		
+<%-- 		<form:hidden path="${usuarios.email }" value="${usuarios.email }"/> --%>
+<%-- 		<form:hidden path="usuarios" value="${usuarios.nome }"/>
+		<form:hidden path="$usuarios" value="${usuarios.senha }"/>
+		<form:hidden path="usuarios" value="${usuarios.senharepetir }"/> --%>
+
+					<!-- Inicio Form  -->
+					<div class="form-group">
+						<label>Nome</label>
+						<form:input path="nome" cssClass="form-control" />
+						<form:errors path="nome" />
+					</div>
+					<div class="form-group">
+						<label>Email</label>
+						<form:input path="email" cssClass="form-control" />
+						<form:errors path="email" />
+					</div>
+					<div class="form-group">
+						<label>Senha</label>
+						<form:password path="senha" cssClass="form-control" />
+						<form:errors path="senha" />
+					</div>
+					<div class="form-group">
+						<label>Senha Repetida</label>
+						<form:password path="senharepetir" cssClass="form-control" />
+						<form:errors path="senharepetir" />
+					</div>
+					<!-- Final form -->
+
+
+
+					<c:forEach items="${roles}" var="roles" varStatus="status" >
+					<c:set var="contains" value="false"/>
+					
+						<%-- <p> ${roles.nome} -- ${roles.nome }</p> --%>
+		 				<c:forEach items="${usuarios.roles }" var="usuarios.roles"  varStatus="status" >
+						<%-- <p> ${usuarios.roles} </p> --%>
+	<%-- 					<p> Roles nome - ${roles } </p>
+						<p> Usuario roles - ${usuarios.roles[status.index] } </p> --%>
+						
+						<c:if test="${roles == usuarios.roles[status.index] }">
+							<c:set var="contains" value="true"/>
+						</c:if>	
+					</c:forEach>
+					<c:choose>
+						<c:when test="${contains}">
+							<form:checkbox path="roles" value="${roles.nome }" checked="true"/> ${roles }
+							<%-- <form:hidden path="${roles }"/> --%>
+							
+							<%-- <p><input type="checkbox" name="roles" value="${roles[status.index].id }" checked="true"> ${roles.nome} </p> --%>
+							<c:set var="contains" value="false"/>
+						</c:when>
+						<c:when test="${not contains }">
+							<form:checkbox path="roles" value="${roles.nome }" /> ${roles }
+						<%-- 	<form:hidden path="${roles }"/> --%>
+							<%-- <p><input type="checkbox" name="roles" value="${roles[status.index] }" > ${roles.nome} </p> --%>
+						
+						</c:when>
+					</c:choose>  
+					
+					
+				</c:forEach> 		
+		</div>
+		<br>
+		<button type="submit" class="btn btn-primary">Salvar</button>
+		
+	
+		</form:form>
+
+
+
+
+
+		</div>
 	
 	<!-- Inicio modal -->
 		<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">

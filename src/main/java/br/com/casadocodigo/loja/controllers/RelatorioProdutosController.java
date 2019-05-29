@@ -41,8 +41,6 @@ public class RelatorioProdutosController {
 			 produto = (List<Produto>) dao.findSemParametros();
 		}
 		
-		
-	    
 	    
 		return produto;
 	}

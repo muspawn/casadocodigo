@@ -17,8 +17,7 @@
 <link rel="stylesheet" href="${cssPath}/bootstrap.min.css" />
 <link rel="stylesheet" href="${cssPath}/bootstrap-theme.min.css" />
 
-<!-- <link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css"/>
-<link rel="stylesheet" href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap-theme.min.css" /> -->
+
 
 <title>Livros de Java, Android, iPhone, Ruby, PHP e muito mais - Casa do Código</title>
 </head>
@@ -39,6 +38,7 @@
 	      <ul class="nav navbar-nav">
 	        <li class="nav-item"><a href="${s:mvcUrl('PC#listar').build()}">Lista de Produtos</a></li>
 	        <li class="nav-item"><a href="${s:mvcUrl('PC#form').build()}">Cadastro de Produtos</a></li>
+	       
 	      </ul>
 	      <ul class="nav navbar-nav navbar-right">
 	      	 <li class="nav-item">
@@ -57,7 +57,10 @@
 
 	<div class="container">
 		
-		<a href="${s:mvcUrl('UC#form').build()} }">Novo Usuário</a>
+		<li class="nav"> <a href="${s:mvcUrl('UC#form').build()} " >Novo Usuário</a> </li>
+
+	
+
 		<br> 
 		<h1>Lista de Usuarios </h1>
 		<p> ${sucesso} </p>
@@ -87,6 +90,7 @@
 				</tr>
 			</c:forEach>
 		</table>
+
 	</div>
 	
 	<!-- Inicio modal -->

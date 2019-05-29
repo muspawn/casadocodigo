@@ -7,7 +7,10 @@ import org.springframework.web.servlet.ModelAndView;
 @ControllerAdvice
 public class ExceptionHandlerController {
 	
-    @ExceptionHandler(Exception.class)
+    
+	
+	
+	@ExceptionHandler(Exception.class)
     public ModelAndView trataExceptionGenerica(Exception exception){
         System.out.println("Erro genérico acontecendo");
         exception.printStackTrace();
@@ -17,4 +20,10 @@ public class ExceptionHandlerController {
         
         return modelAndView;
     }
+    
+    
+    
+    
+    
+    
 }

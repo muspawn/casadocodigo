@@ -23,7 +23,7 @@ import br.com.casadocodigo.loja.models.Produto;
 public class RelatorioProdutosController {
 	
 	@Autowired
-	private ProdutoDAO dao;
+	private ProdutoDAO produtoDAO;
 	
 	
 	@RequestMapping(method=RequestMethod.GET, value="/relatorio-produtos", produces="application/json")
@@ -36,9 +36,9 @@ public class RelatorioProdutosController {
 			Date dataFormatada = formatData.parse(datadeLancamento);
             Calendar data = Calendar.getInstance();
             data.setTime(dataFormatada);
-			  produto = (List<Produto>) dao.findComParametros( data);
+			  produto = (List<Produto>) produtoDAO.findComParametros( data);
 		} else {
-			 produto = (List<Produto>) dao.findSemParametros();
+			 produto = (List<Produto>) produtoDAO.findSemParametros();
 		}
 		
 	    

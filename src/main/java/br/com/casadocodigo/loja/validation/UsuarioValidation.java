@@ -41,7 +41,7 @@ public class UsuarioValidation implements Validator{
 				errors.rejectValue("senha", "number.smallnumber");;
 			}
 			
-			System.out.println(usuario.getEmail());
+			
 			
 	
 			

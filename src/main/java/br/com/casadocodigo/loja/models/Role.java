@@ -1,5 +1,7 @@
 package br.com.casadocodigo.loja.models;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
@@ -9,7 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 @Entity
 @Embeddable
-public class Role implements GrantedAuthority{
+public class Role implements GrantedAuthority, Serializable{
 
 
 

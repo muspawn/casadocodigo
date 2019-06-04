@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,9 +24,13 @@ import br.com.casadocodigo.loja.models.Usuario;
 @Transactional
 public class UsuarioDAO implements UserDetailsService{
 
+	@Autowired
+	private RoleDAO roleDAO;
 	
 	@PersistenceContext
 	private EntityManager manager;
+	
+	
 	
 	
 	public void gravarUsuario(Usuario usuario) {
@@ -48,7 +53,7 @@ public class UsuarioDAO implements UserDetailsService{
 		Usuario usuario = null;
 		
 		try {
-			usuario =  manager.createQuery("select u from Usuario u  where u.email = :email", 
+			usuario =  manager.createQuery("select distinct(u) from Usuario u  where u.email = :email", 
 					Usuario.class).setParameter("email", email)
 					.getSingleResult();
 			
@@ -77,7 +82,7 @@ public class UsuarioDAO implements UserDetailsService{
 	}
 
 	public List<Usuario> listarUsuarios() throws Exception  {
-		return manager.createQuery("select u from Usuario u order by u.nome", Usuario.class).getResultList();
+		return manager.createQuery("select distinct(u) from Usuario u order by u.nome", Usuario.class).getResultList();
 	}
 
 	//select distinct(p) from Produto p join fetch p.precos precos where p.id = :id
@@ -118,24 +123,27 @@ public class UsuarioDAO implements UserDetailsService{
 		
 	}
 	
-	public void updateUsuario(Usuario usuario, Role role) {
+	public void updateUsuario(Usuario usuario) throws Exception {
 		
+		System.out.println(usuario.getRoles());
+		List<Role> roles = roleDAO.listarRole();
 
-		
-		manager.getTransaction().begin();
+		Usuario user2;
+		user2 = manager.find(Usuario.class, usuario.getEmail());
 
-	
+		for (int i = 0; i < roles.size(); i++) {
+			if (user2.getRoles().size() > i) {
+				user2.getRoles().remove(i);
+			}
 
+		}
 
-		
-		usuario.setRoles(Arrays.asList(role));
-		manager.persist(usuario);		
-		
-		
-		
-		
-		manager.getTransaction().commit();
-		
+		manager.merge(user2);
+		manager.flush();
+
+		manager.merge(usuario);
+		manager.flush();
+			
 
 		
 		

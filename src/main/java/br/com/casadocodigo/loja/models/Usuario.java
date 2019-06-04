@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 
@@ -45,6 +46,7 @@ public class Usuario implements UserDetails, Serializable {
 	@Column(name="nome")
 	private String nome;
 
+	@ElementCollection
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "Usuario_Role",
 		joinColumns = @JoinColumn(name = "email"), 

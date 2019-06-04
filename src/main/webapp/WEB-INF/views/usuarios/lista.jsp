@@ -63,8 +63,9 @@
 
 		<br> 
 		<h1>Lista de Usuarios </h1>
-		<p> ${sucesso} </p>
-		<p> ${falha} </p>
+		<br>
+		<h2> ${sucesso} </h2>
+		
 	
 		<table class="table table-bordered table-striped table-hover">
 			<tr>
@@ -81,8 +82,8 @@
 					<td>${usuarios.nome }</td>
 					<td>
 						<c:forEach items="${usuarios.roles }" var="roles" varStatus="id">
-							<c:if test="${id.count} > 1 ">, </c:if>
-							${roles.nome }
+							<c:if test="${id.count} > 1 "> , </c:if>
+							${roles }
 						</c:forEach>
 					</td>
 					<td> <a href="${s:mvcUrl('UC#detalhe').arg(0, usuarios.email).build() }">   <p style="text-align:center;"> <img  src="${imgPath}/adicionar.png" alt="+"/> </p> </a></td>

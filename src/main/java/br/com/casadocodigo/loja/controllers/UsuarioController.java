@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,7 +36,7 @@ public class UsuarioController {
 	@Autowired
 	private RoleDAO roleDAO;
 	
-	@InitBinder()
+	@InitBinder("Usuario")
 	public void InitBinder(WebDataBinder binder) {
 		binder.addValidators(new UsuarioValidation());
 	}
@@ -61,7 +62,7 @@ public class UsuarioController {
 		
 		
 			usuarioDAO.gravarUsuario(usuario);
-			redirectAttributes.addFlashAttribute("message", "Usuario cadastrado com sucesso!");
+			redirectAttributes.addFlashAttribute("sucesso", "Usuario cadastrado com sucesso!");
 	
 			return new ModelAndView("redirect:/usuarios");
 		
@@ -100,13 +101,17 @@ public class UsuarioController {
 	
 	
 	
-	
-	@RequestMapping(name = "updateRolesdoUsuario", method = RequestMethod.POST)
-	public ModelAndView updateRolesdoUsuario(Usuario usuario, Role roles) {
+	@Transactional
+	@RequestMapping(value="/formRoleUsuario", method = RequestMethod.POST)
+	public ModelAndView updateRolesdoUsuario(@ModelAttribute("usuarios") Usuario usuarios, BindingResult result,RedirectAttributes redirectAttributes) throws Exception {
 
-		usuarioDAO.updateUsuario(usuario, roles);
-
-		return new ModelAndView("redirect:/");
+		System.out.println(usuarios.getRoles());
+		
+		usuarioDAO.updateUsuario(usuarios);
+		
+		redirectAttributes.addFlashAttribute("sucesso", "Permissões alteradas com sucesso!");
+		
+		return new ModelAndView("redirect:/usuarios");
 
 	}
 	 

@@ -58,8 +58,9 @@
 
 	<div class="container">
 		
-		<form:form action="${s:mvcUrl('updateRolesdoUsuario').build() } " method="post"   modelAttribute="usuarios">
-		<%-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> --%>
+		<form:form action="${s:mvcUrl('UC#updateRolesdoUsuario').build() } " method="post"    modelAttribute="usuarios" >
+		<form:errors path="*" cssClass="errorblock" element="div" />
+		 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> 
 		<br> 
 		<h1>Cadastro de permissão para: ${usuarios.nome}  </h1>
 		<p> ${sucesso} </p>
@@ -72,33 +73,13 @@
 		
 		<div class="form-group">
 		
-		
-<%-- 		<form:hidden path="${usuarios.email }" value="${usuarios.email }"/> --%>
-<%-- 		<form:hidden path="usuarios" value="${usuarios.nome }"/>
-		<form:hidden path="$usuarios" value="${usuarios.senha }"/>
-		<form:hidden path="usuarios" value="${usuarios.senharepetir }"/> --%>
 
 					<!-- Inicio Form  -->
-					<div class="form-group">
-						<label>Nome</label>
-						<form:input path="nome" cssClass="form-control" />
-						<form:errors path="nome" />
-					</div>
-					<div class="form-group">
-						<label>Email</label>
-						<form:input path="email" cssClass="form-control" />
-						<form:errors path="email" />
-					</div>
-					<div class="form-group">
-						<label>Senha</label>
-						<form:password path="senha" cssClass="form-control" />
-						<form:errors path="senha" />
-					</div>
-					<div class="form-group">
-						<label>Senha Repetida</label>
-						<form:password path="senharepetir" cssClass="form-control" />
-						<form:errors path="senharepetir" />
-					</div>
+						<form:hidden path="nome"  />
+						<form:hidden path="email"  />
+						<form:hidden path="senha"  />
+						<form:hidden path="senharepetir" />
+		
 					<!-- Final form -->
 
 

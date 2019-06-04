@@ -37,7 +37,7 @@ public class ProdutoDAO {
 	}
 	
 	public List<Produto> findComParametros(Calendar data) {
-        return manager.createQuery("select distinct(p) from Produto p join fetch p.precos precos where p.dataLancamento = :dataLancamento", 
+        return manager.createQuery("select distinct(p) from Produto p join fetch p.precos precos where p.dataLancamento >= :dataLancamento", 
         		Produto.class).setParameter("dataLancamento", data)
         		.getResultList();
 	}	
